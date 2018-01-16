@@ -6,6 +6,7 @@ public class disableVRTracking : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		UnityEngine.VR.InputTracking.disablePositionalTracking = true;
 		
 	}
 	

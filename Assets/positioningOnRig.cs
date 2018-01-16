@@ -7,11 +7,14 @@ public class positioningOnRig : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameObject.transform.position = leftHandRigBody.transform.position;
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		gameObject.transform.position = leftHandRigBody.transform.position;
 		
 	}
 }
