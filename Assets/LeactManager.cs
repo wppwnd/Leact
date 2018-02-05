@@ -6,6 +6,7 @@ public class LeactManager : MonoBehaviour {
 
 	public KinectManager kinectmgr;
 	public SimpleHandListener handListener;
+	//public Kinect
 	//private LMListener _LMListener;
 
 	// Use this for initialization
