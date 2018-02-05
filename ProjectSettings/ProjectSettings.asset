@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 13
-  productGUID: a7768f4e5a07e70448b39d48c8b6c070
+  productGUID: 01242d5a99d98ea4595461e8066f1f9d
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
@@ -12,7 +12,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: leact_v3
+  productName: leact_vrkinect_leap
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -526,14 +526,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: leact_v3
+  metroPackageName: leact_vrkinect_leap
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: leact_v3
+  metroApplicationDescription: leact_vrkinect_leap
   wsaImages: {}
   metroTileShortName: 
   metroCommandLineArgsFile: 
@@ -608,9 +608,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 6e5c37fb-7977-4098-b49e-6ed81bc26568
-  projectName: leact_v3
-  organizationId: birgit-dbea565b-1889-402f-b18c-bd24bcddeb79
+  cloudProjectId: 5a80b24a-9d5c-4b00-b507-b1ca9291483c
+  projectName: leact_vrkinect_leap
+  organizationId: trashtatur
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
