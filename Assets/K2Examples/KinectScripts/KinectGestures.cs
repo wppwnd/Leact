@@ -642,8 +642,8 @@ public class KinectGestures : MonoBehaviour, GestureManagerInterface
 
 			// check for Click
 			case Gestures.Click:
-				switch(gestureData.state)
-				{
+				switch(gestureData.state){	
+
 					case 0:  // gesture detection - phase 1
 						if(jointsTracked[rightHandIndex] && jointsTracked[rightElbowIndex] &&
 					       (jointsPos[rightHandIndex].y - jointsPos[rightElbowIndex].y) > -0.1f)

@@ -9,6 +9,8 @@ public class SimpleHandListener : MonoBehaviour {
 	private KinectSensor _Sensor;
 	private BodyFrameReader _Reader;
 	private Body[] _Data = null;
+	private Boolean isClickedLeft = false;
+	private Boolean isClickedRight= false;
 
 	public UnityEngine.UI.Text gestureInfo;
 	public UnityEngine.UI.Text gestureInfoRight;
@@ -103,12 +105,14 @@ public class SimpleHandListener : MonoBehaviour {
 						{
 							gestureInfoRight.text = string.Empty;
 						}
+						isClickedRight = false;
 					}
 
 					else if (_Data[idx].HandRightState == HandState.Closed)
 					{
 						progressGestureTime = Time.realtimeSinceStartup;
 						gestureInfoRight.text = "Right Hand closed";
+						isClickedLeft = true;
 					}
 
 					else if (_Data[idx].HandRightState == HandState.Unknown)
@@ -120,6 +124,7 @@ public class SimpleHandListener : MonoBehaviour {
 						{
 							gestureInfoRight.text = string.Empty;
 						}
+						isClickedRight = false;
 
 					}
 
@@ -146,11 +151,13 @@ public class SimpleHandListener : MonoBehaviour {
 						{
 							gestureInfo.text = string.Empty;
 						}
+						isClickedLeft = false;
 					}
 
 					else if (_Data[idx].HandLeftState == HandState.Closed)
 					{
 						progressGestureTime = Time.realtimeSinceStartup;
+						isClickedLeft = true;
 						gestureInfo.text = "Left Hand closed";
 					}
 
@@ -163,10 +170,33 @@ public class SimpleHandListener : MonoBehaviour {
 						{
 							gestureInfo.text = string.Empty;
 						}
+						isClickedLeft = false;
 
 					}
 				}
 			}
 		}
 	}
+
+
+	public Boolean isClickedLeft_m()
+	{
+		return isClickedLeft;
+	}
+
+	public Boolean isClickedRight_m()
+	{
+		return isClickedRight;
+	}
+	public int getLeftHandQuadrant(){
+		return 0;
+	}
+
+	public int getRightHandQuadrant(){
+		return 0;
+	}
+
+
+
+
 }
