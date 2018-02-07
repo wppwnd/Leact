@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Leap;
+using Leap.Unity.Interaction;
 
 public class SimpleLeapListener : MonoBehaviour {
 
@@ -52,29 +53,29 @@ public class SimpleLeapListener : MonoBehaviour {
 				if (hands [i].IsLeft) {
 					leftDetected = true;
 
-					if (leftHandAttachment != null & leftHandPalm != null) {
-						//attach to hand and then delete variable
-						//Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity);
-
-
-
-						Debug.Log ("left palm iss null " + (leftHandPalm == null));
-						GameObject tmpobj = Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity);
-
-						tmpobj.transform.SetParent (leftHandPalm.transform);
-//						Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity, leftHandPalm.transform);
-
-						leftHandAttachment = null;
-					}
+//					if (leftHandAttachment != null & leftHandPalm != null) {
+//						//attach to hand and then delete variable
+//						//Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity);
+//
+//
+//
+////						Debug.Log ("left palm iss null " + (leftHandPalm == null));
+////						GameObject tmpobj = Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity);
+////
+////						tmpobj.transform.SetParent (leftHandPalm.transform);
+//////						Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity, leftHandPalm.transform);
+////
+////						leftHandAttachment = null;
+//					}
 
 				} else {
 					rightDetected = true;
 
-					if (rightHandAttachment != null) {
-						//attach to hand and then delete variable
-//						Instantiate(rightHandAttachment, hands [i].PalmPosition  , Quaternion.identity);
-						rightHandAttachment = null;
-					}
+//					if (rightHandAttachment != null) {
+//						//attach to hand and then delete variable
+////						Instantiate(rightHandAttachment, hands [i].PalmPosition  , Quaternion.identity);
+//						rightHandAttachment = null;
+//					}
 				}
 			}
 
@@ -99,11 +100,25 @@ public class SimpleLeapListener : MonoBehaviour {
 	public bool anyHandDetected(){
 		return handsDetected;
 	}
-	public void attachToLeftHand(GameObject obj){
+	public void attachToLeftHand(Anchor anchor, AnchorGroup agroup, GameObject obj){
 	
+		leftHandPalm = GameObject.FindGameObjectWithTag("LeftHand");
+
+		if (leftHandPalm != null & !anchor.hasAnchoredObjects) {
+			GameObject tmpobj = Instantiate (obj, new Vector3 (0, 0, 0), Quaternion.identity);
+
+			//tmpobj.transform.SetParent (leftHandPalm.transform);
 
 
-		leftHandAttachment = obj;
+			AnchorableBehaviour ascript = tmpobj.GetComponent<AnchorableBehaviour> ();
+
+			ascript.anchor = anchor;
+			ascript.anchorGroup = agroup;
+
+			ascript.TryAttach (true);
+
+//			leftHandAttachment = obj;
+		}
 	
 	}
 	public void attachToRightHand(GameObject obj){

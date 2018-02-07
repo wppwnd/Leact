@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity;
+using Leap.Unity.Interaction;
 
 public class LeactManager : MonoBehaviour {
 
@@ -11,6 +12,11 @@ public class LeactManager : MonoBehaviour {
 	private SimpleLeapListener leapListener;
 	public UnityEngine.UI.Text gestureInfoRightScreen;
 	public GameObject objToSpawn;
+
+	public Anchor anchor;
+	public AnchorGroup agroup;
+
+	public GameObject leftPalm;
 
 	// Use this for initialization
 	void Start () {
@@ -44,7 +50,8 @@ public class LeactManager : MonoBehaviour {
 		//spawn something if the kinect detects a click but leap doesnt
 		if (handListener.isClickedLeft_m () & !leapListener.leftHandDetected ()) {
 			//spawn a ball or something like this
-			leapListener.attachToLeftHand(objToSpawn);
+//			leapListener.attachToLeftHand(objToSpawn);
+			leapListener.attachToLeftHand(anchor,agroup,objToSpawn);
 		
 		}
 
