@@ -28,29 +28,13 @@ public class LeactManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		if (handListener.isClickedLeft_m()) {
-//			//Debug.Log ("isClickedLeft true");
-//		}
-//
-//		if (handListener.isClickedRight_m()) {
-//			//Debug.Log ("isClickedRight true");
-//		}
-//
-//		if (leapListener.leftHandDetected()) {
-//			Debug.Log ("left leaphand detected");
-//		}
-//
-//		if (leapListener.rightHandDetected()) {
-//			Debug.Log ("Right leaphand detected");
-//		}
 
 		gestureInfoRightScreen.text = getOnScreenText ();
 
 
-		//spawn something if the kinect detects a click but leap doesnt
-		if (handListener.isClickedLeft_m () & !leapListener.leftHandDetected ()) {
+		//spawn something if the kinect detects a click but leap no hand
+		if (handListener.isClickedLeft_m () & leapListener.getLeftHandEnter() ) {
 			//spawn a ball or something like this
-//			leapListener.attachToLeftHand(objToSpawn);
 			leapListener.attachToLeftHand(anchor,agroup,objToSpawn);
 		
 		}

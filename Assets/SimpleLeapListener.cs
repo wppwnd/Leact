@@ -11,6 +11,8 @@ public class SimpleLeapListener : MonoBehaviour {
 	private bool handsDetected = false;
 	private bool leftDetected = false;
 	private bool rightDetected = false;
+	private bool leftEnter = false;
+	private bool rightEnter = false;
 
 
 
@@ -39,72 +41,96 @@ public class SimpleLeapListener : MonoBehaviour {
 
 
 		Frame frame = controller.Frame ();
+		Frame frameLast = controller.Frame (1);
+
+
+
 
 		leftHandPalm = GameObject.FindGameObjectWithTag("LeftHand");
 
+		//array with boolean for left hand detected (entry 1) and right hand detected (entry 2) at actual frame
+		bool[] leftRight = frameHandDetection (frame);
+
+		leftDetected = leftRight [0];
+		rightDetected  = leftRight [1];
+		//array with boolean for left hand detected (entry 1) and right hand detected (entry 2) at LAST frame
+		bool[] leftRightOld = frameHandDetection (frameLast);
+		if (leftRightOld [0] == false & leftDetected == true) {
+			//Debug.Log ("leftEnter SET");
+			leftEnter = true;
+		}
+		else if(leftRightOld[0] == true & leftDetected == true){
+			leftEnter=false;
+		}
+		else if(leftRightOld[0] == true & leftDetected==false){
+			//hand leaves the Leap-FOV (put obj onto stack
+			leftEnter=false;
+		}
+
+
+		if (leftRightOld [1] == false & rightDetected == true) {
+			rightEnter = true;
+		}
+		else if(leftRightOld[1] == true & rightDetected == true){
+			rightEnter=false;
+		}
+		else if(leftRightOld[1] == true & rightDetected==false){
+			//hand leaves the Leap-FOV (put obj onto stack
+			rightEnter=false;
+		}
+
+
+	}
+	private bool[] frameHandDetection(Frame frame){
+		bool[] detectedHands = new bool[2];
 		if (frame.Hands.Count > 0) {
-			
-		
+
+
 			handsDetected = true;
 
 			List<Hand> hands = frame.Hands;
 
 			for (int i = 0; i < hands.Count; i++) {
 				if (hands [i].IsLeft) {
-					leftDetected = true;
+//					leftDetected = true;
+					detectedHands [0] = true;
 
-//					if (leftHandAttachment != null & leftHandPalm != null) {
-//						//attach to hand and then delete variable
-//						//Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity);
-//
-//
-//
-////						Debug.Log ("left palm iss null " + (leftHandPalm == null));
-////						GameObject tmpobj = Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity);
-////
-////						tmpobj.transform.SetParent (leftHandPalm.transform);
-//////						Instantiate(leftHandAttachment, new Vector3(0,0,0) , Quaternion.identity, leftHandPalm.transform);
-////
-////						leftHandAttachment = null;
-//					}
+
+	
 
 				} else {
-					rightDetected = true;
+//					rightDetected = true;
+					detectedHands [1] = true;
 
-//					if (rightHandAttachment != null) {
-//						//attach to hand and then delete variable
-////						Instantiate(rightHandAttachment, hands [i].PalmPosition  , Quaternion.identity);
-//						rightHandAttachment = null;
-//					}
 				}
 			}
 
 
-		} 
-//		else {
-//			handsDetected = false;
-//			leftDetected = false;
-//			rightDetected = false;
-//		}
-//
+		}
 
-
-
+		return detectedHands;
 	}
+
 	public bool leftHandDetected(){
 		return leftDetected;
 	}
+
 	public bool rightHandDetected(){
 		return rightDetected;
 	}
+
 	public bool anyHandDetected(){
 		return handsDetected;
 	}
+
 	public void attachToLeftHand(Anchor anchor, AnchorGroup agroup, GameObject obj){
 	
 		leftHandPalm = GameObject.FindGameObjectWithTag("LeftHand");
+		Debug.Log ("attachToLeftHand entered");
+		//if (leftHandPalm != null & !anchor.hasAnchoredObjects & leftEnter) {
+		if (leftHandPalm != null & !anchor.hasAnchoredObjects ) {	
+			Debug.Log ("left hand anchor has no objects");
 
-		if (leftHandPalm != null & !anchor.hasAnchoredObjects) {
 			GameObject tmpobj = Instantiate (obj, new Vector3 (0, 0, 0), Quaternion.identity);
 
 			//tmpobj.transform.SetParent (leftHandPalm.transform);
@@ -127,4 +153,13 @@ public class SimpleLeapListener : MonoBehaviour {
 		rightHandAttachment = obj;
 
 	}
+
+	public bool getLeftHandEnter(){
+		return leftEnter;
+	}
+
+	public bool getRightHandEnter(){
+		return rightEnter;
+	}
+
 }
