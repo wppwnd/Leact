@@ -8092,6 +8092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e7c98eed9f6b047956e9430e2a8c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kinectmgr: {fileID: 0}
   gestureInfo: {fileID: 2060897186}
   gestureInfoRight: {fileID: 860658251}
 --- !u!114 &659385097
@@ -21301,6 +21302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e7c98eed9f6b047956e9430e2a8c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kinectmgr: {fileID: 659385097}
   gestureInfo: {fileID: 2060897186}
   gestureInfoRight: {fileID: 860658251}
 --- !u!1 &1693556840

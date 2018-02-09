@@ -33,7 +33,7 @@ public class LeactManager : MonoBehaviour {
 
 
 		//spawn something if the kinect detects a click but leap no hand
-		if (handListener.isClickedLeft_m () & leapListener.getLeftHandEnter() ) {
+		if (handListener.isClickedLeft_m () & leapListener.getLeftHandEnter() & handListener.getLeftHandQuadrant ) {
 			//spawn a ball or something like this
 			leapListener.attachToLeftHand(anchor,agroup,objToSpawn);
 		

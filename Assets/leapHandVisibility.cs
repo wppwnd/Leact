@@ -36,7 +36,7 @@ public class leapHandVisibility : MonoBehaviour {
 
 		bool attached = abehave.isAttached;
 		if (attached & !leapListener.leftHandDetected ()) {
-			Debug.Log ("leapHandvisibility -> is attached to anchor and no leaphand detected");
+			//Debug.Log ("leapHandvisibility -> is attached to anchor and no leaphand detected");
 
 //			this.gameObject.SetActive (false);
 

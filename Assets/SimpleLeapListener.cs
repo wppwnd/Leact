@@ -126,15 +126,14 @@ public class SimpleLeapListener : MonoBehaviour {
 	public void attachToLeftHand(Anchor anchor, AnchorGroup agroup, GameObject obj){
 	
 		leftHandPalm = GameObject.FindGameObjectWithTag("LeftHand");
-		Debug.Log ("attachToLeftHand entered");
+		//Debug.Log ("attachToLeftHand entered");
 		//if (leftHandPalm != null & !anchor.hasAnchoredObjects & leftEnter) {
 		if (leftHandPalm != null & !anchor.hasAnchoredObjects ) {	
-			Debug.Log ("left hand anchor has no objects");
+			//Debug.Log ("left hand anchor has no objects");
 
 			GameObject tmpobj = Instantiate (obj, new Vector3 (0, 0, 0), Quaternion.identity);
 
 			//tmpobj.transform.SetParent (leftHandPalm.transform);
-
 
 			AnchorableBehaviour ascript = tmpobj.GetComponent<AnchorableBehaviour> ();
 
@@ -148,7 +147,6 @@ public class SimpleLeapListener : MonoBehaviour {
 	
 	}
 	public void attachToRightHand(GameObject obj){
-
 
 		rightHandAttachment = obj;
 
