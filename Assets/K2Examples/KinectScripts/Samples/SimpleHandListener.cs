@@ -90,7 +90,6 @@ public class SimpleHandListener : MonoBehaviour {
 				{
 					//Vector3 relPos = GetRelativeJoint (4, 6);
 					//Debug.Log ("x:" + relPos.x + "y:" + relPos.y + "z:" + relPos.z);
-					int quad = getLeftHandQuadrant(4);
 
 
 					if (_Data[idx].HandRightState == HandState.Open)
@@ -181,24 +180,34 @@ public class SimpleHandListener : MonoBehaviour {
 
 		Vector3 relPosLeft = GetRelativeJoint (20, 6);
 
-		float x = relPosLeft.x;
-		float y = relPosLeft.y;
+//		Debug.Log ("relPos:" + relPosLeft);
 
-		double degree = System.Math.Atan2 (x, y) * 180 / System.Math.PI;
-		if (degree < 0) {
-			degree = 360 + degree;
+		if (relPosLeft != Vector3.zero) {
+			
+
+			float x = relPosLeft.x;
+			float y = relPosLeft.y;
+
+			double degree = System.Math.Atan2 (x, y) * 180 / System.Math.PI;
+			if (degree < 0) {
+				degree = 360 + degree;
+			}
+
+
+			//Debug.Log ("degree:" + degree);
+
+			double degPerQuad = 360 / (double)quadCtr;
+			double degPhase = degPerQuad / 2;
+
+			int quadrant = (int)(((degree + degPhase) % 360) / degPerQuad) + 1;
+
+			//Debug.Log ("Quadrant:" + quadrant);
+
+			return quadrant;
 		}
 
-		//Debug.Log ("degree:" + degree);
+		return -1;
 
-		double degPerQuad = 360 / (double) quadCtr;
-		double degPhase = degPerQuad / 2;
-
-		int quadrant = (int) ( ((degree + degPhase) % 360) / degPerQuad) + 1;
-
-		//Debug.Log ("Quadrant:" + quadrant);
-
-		return 0;
 	}
 
 	public int getRightHandQuadrant(){
@@ -207,10 +216,8 @@ public class SimpleHandListener : MonoBehaviour {
 
 	private Vector3 GetRelativeJoint(int jointOrigin, int jointTarget){
 	 
-
-
 		if (kinectmgr != null) {
-			Debug.Log ("KinectMgr is null");
+//			Debug.Log ("KinectMgr is not null");
 		
 
 			List<long> UserID = kinectmgr.GetAllUserIds ();
@@ -227,11 +234,33 @@ public class SimpleHandListener : MonoBehaviour {
 			} 
 		}
 
-			return new Vector3 (0, 0, 0);
+		return Vector3.zero;
 
-		
+	}
+
+	public float getLeftHandAngle(){
+
+		//JointID Spine_shoulder = 20
+		//JointID WristLeft = 6
+
+		Vector3 relPosLeft = GetRelativeJoint (20, 6);
+
+		//		Debug.Log ("relPos:" + relPosLeft);
+
+		if (relPosLeft != Vector3.zero) {
 
 
+			float x = relPosLeft.x;
+			float y = relPosLeft.y;
+
+			double degree = System.Math.Atan2 (x, y) * 180 / System.Math.PI;
+			if (degree < 0) {
+				degree = 360 + degree;
+			}
+
+			return (float) degree;
+		}
+		return (float) 366;
 	}
 
 }
