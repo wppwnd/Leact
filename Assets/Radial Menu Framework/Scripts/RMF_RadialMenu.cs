@@ -149,7 +149,7 @@ public class RMF_RadialMenu : MonoBehaviour {
                 selectButton(index);
 
                 //If we click or press a "submit" button (Button on joystick, enter, or spacebar), then we'll execut the OnClick() function for the button.
-                if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Submit")) {
+				if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Submit")) {
 
                     ExecuteEvents.Execute(elements[index].button.gameObject, pointer, ExecuteEvents.submitHandler);
 
@@ -163,7 +163,7 @@ public class RMF_RadialMenu : MonoBehaviour {
         if (useSelectionFollower && selectionFollowerContainer != null) {
             if (!useGamepad || joystickMoved)
 //                selectionFollowerContainer.rotation = Quaternion.Euler(0, 0, rawAngle + 270);
-				selectionFollowerContainer.rotation = Quaternion.Euler(0, 0, -currentAngle + 45);
+				selectionFollowerContainer.rotation= Quaternion.Euler(0, 0, currentAngle -45);
            
 
         } 
@@ -219,6 +219,11 @@ public class RMF_RadialMenu : MonoBehaviour {
 	public int getPrevActiveIndex(){
 		return previousActiveIndex+1;
 	}
+//	public void highlightTest(int i){
+//	
+//		selectButton (i);
+//		ExecuteEvents.Execute(elements[index].button.gameObject, pointer, ExecuteEvents.submitHandler);
+//	}
 
 
 }

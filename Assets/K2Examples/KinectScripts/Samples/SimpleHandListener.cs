@@ -112,18 +112,18 @@ public class SimpleHandListener : MonoBehaviour {
 						isClickedLeft = true;
 					}
 
-					else if (_Data[idx].HandRightState == HandState.Unknown)
-					{
-						progressGestureTime = Time.realtimeSinceStartup;
-						gestureInfoRight.text = "Right Hand unknown";
-
-						if (Time.realtimeSinceStartup - progressGestureTime > 2.0f) 
-						{
-							gestureInfoRight.text = string.Empty;
-						}
-						isClickedRight = false;
-
-					}
+//					else if (_Data[idx].HandRightState == HandState.Unknown)
+//					{
+//						progressGestureTime = Time.realtimeSinceStartup;
+//						gestureInfoRight.text = "Right Hand unknown";
+//
+//						if (Time.realtimeSinceStartup - progressGestureTime > 2.0f) 
+//						{
+//							gestureInfoRight.text = string.Empty;
+//						}
+//						isClickedRight = false;
+//
+//					}
 
 
 
@@ -147,18 +147,18 @@ public class SimpleHandListener : MonoBehaviour {
 						gestureInfo.text = "Left Hand closed";
 					}
 
-					else if (_Data[idx].HandLeftState == HandState.Unknown)
-					{
-						progressGestureTime = Time.realtimeSinceStartup;
-						gestureInfo.text = "Left Hand unknown";
-
-						if (Time.realtimeSinceStartup - progressGestureTime > 2.0f) 
-						{
-							gestureInfo.text = string.Empty;
-						}
-						isClickedLeft = false;
-
-					}
+//					else if (_Data[idx].HandLeftState == HandState.Unknown)
+//					{
+//						progressGestureTime = Time.realtimeSinceStartup;
+//						gestureInfo.text = "Left Hand unknown";
+//
+//						if (Time.realtimeSinceStartup - progressGestureTime > 2.0f) 
+//						{
+//							gestureInfo.text = string.Empty;
+//						}
+//						isClickedLeft = false;
+//
+//					}
 				}
 			}
 		}
@@ -243,7 +243,11 @@ public class SimpleHandListener : MonoBehaviour {
 		//JointID Spine_shoulder = 20
 		//JointID WristLeft = 6
 
-		Vector3 relPosLeft = GetRelativeJoint (20, 6);
+		//joints from SPINE_SHOULDER to LEFT_HAND
+//		Vector3 relPosLeft = GetRelativeJoint (20, 6);
+
+		//jointangle from LEFT_SHOULDER to LEFT_HAND
+		Vector3 relPosLeft = GetRelativeJoint (4, 6);
 
 		//		Debug.Log ("relPos:" + relPosLeft);
 
