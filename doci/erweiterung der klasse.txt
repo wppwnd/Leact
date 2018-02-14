@@ -1,0 +1,22 @@
+@startuml
+
+title Erweiterungen der Klasse
+
+
+skinparam componentStyle uml2
+class RMF_RadialMenu {
+  .. Attribute ..
+- id: int 
+- kinectAngle: float
+
+  .. Methoden ..
+-normalizeAngle( float ): float 
++setKinectAngle( float ): void
++setLabelText( string ): void
++setItemText( string ): void
++getPrevActiveIndex(): int
+}
+
+
+
+@enduml

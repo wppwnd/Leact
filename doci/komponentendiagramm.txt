@@ -1,0 +1,69 @@
+@startuml
+
+skinparam componentStyle uml2
+
+title Leact - Komponenten Zusammenhang
+
+
+ 
+
+node "KinectManager"{
+    [SimpleHandListener] as SHL
+    note left of SHL : liefert Infos über\nWinkel und Gesten\nvon Kinect
+    interface isCLickedLeft as isClickedLeft
+    interface isClickedRight
+    interface getLeftHandAngle
+    SHL -down- isClickedLeft
+    SHL -down- isClickedRight
+    SHL -down- getLeftHandAngle
+}
+
+node "LeapController"{
+    [Canvas]
+    note bottom of Canvas : Stellt die Leinwand bereit\nauf der das Menü\nangezeigt werden soll
+    [SimpleLeapListener] as SLL
+    note left of SLL : Stellt Informationen über\nsimple Leap-Gesten zur\nVerfügung
+    interface leftHandDetected as leftHandDetected
+    interface rightHandDetected as rightHandDetected
+    interface anyHandDetected
+    interface attachToLeftHand as attachToLeftHand
+    interface getLeftHandEnter as getLeftHandEnter
+    interface getRightHandEnter
+    
+    interface Transform as canvasTransform
+    Canvas -up- canvasTransform
+    
+    SLL -up- leftHandDetected
+    SLL -up- rightHandDetected
+    SLL -up- attachToLeftHand
+    SLL -up- getLeftHandEnter
+    SLL -down- getRightHandEnter
+    SLL -down- anyHandDetected
+}    
+node "LeactManager"{
+    [LeactManager] as LeactMgr
+    [MenuFabric]
+    note top of MenuFabric : Fabriziert die Menüs\nSPOC für Menü-\neigenschaften
+    interface showMenu as showMenu
+    interface prevMenu as prevMenu
+    
+    
+    MenuFabric - showMenu
+    MenuFabric -down- prevMenu
+}
+
+LeactMgr ---up-( isClickedLeft
+LeactMgr ---up-( getLeftHandAngle
+
+LeactMgr --down-( leftHandDetected
+LeactMgr --down-( rightHandDetected
+LeactMgr --down-( getLeftHandEnter
+LeactMgr --down-( attachToLeftHand
+
+LeactMgr -left-( showMenu
+LeactMgr -( prevMenu
+
+LeactMgr -( canvasTransform
+
+
+@enduml

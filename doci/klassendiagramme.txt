@@ -1,0 +1,117 @@
+@startuml
+
+title Erstellte Klassen/Scripte/Unity-Komponenten
+
+
+skinparam componentStyle uml2
+class LeactManager {
+  .. Attribute ..
++ kinectmgr: KinectManager 
+- handlistener: SimpleHandListener
++ leapmgr: LeapHandController
+- leapListener: SimpleLeapListener
++ objToSpawn: GameObject
++ rootMenu: RMF_RadialMenu
++ canvas: GameObject
++ anchor: Anchor
++ agroup: AnchorGroup
+- fabrik: MenuFabric
+- cooldownTime: float
+- cooldownStart: float
+- leftHandClickTrigger: bool
+
+  .. Methoden ..
++ Start( ): void 
++ Update ( ): void
+- accessmenu( index: int ): void
+- getOnScreenText( ): String
+
+}
+
+class SimpleLeapListener{
+  .. Attribute ..
+- controller Controller
+- handsDetected: bool
+- leftDetected: bool
+- rightDetected: bool
+- leftEnter: bool
+- rightEnter: bool
+- leftHandAttachment: GameObject
+- rightHandAttachment: GameObject
+- leftHandPalm: GameObject
+- rightHandPalm: GameObject
+  
+  .. Methoden ..
++ Start( ): void
++ Update( ): void
+- frameHandDetection( frame: Frame): bool[2]
++ leftHandDetected( ): bool
++ rightHandDetected( ): bool
++ anyHandDetected( ): bool
++ attachToLeftHand( anchor: Anchor, agroup:AnchorGroup, obj:GameObject): void
++ getLeftHandEnter( ): bool
++ getRightHandEnter( ): bool
+}
+class MenuFabric{
+  .. Attribute ..
++ menu4: GameObject
++ menu3: GameObject
++ menu2: GameObject
+- active: RMF_RadialMenu
+- menuHistory: Stack<int>
+- successor: Hashtable<int,List<int>>
++ spawnObjects: List<GameObject>
+- nullinteger: int
+- cooldownTime: float
+- cooldownStart: float
+- lastText: String
+- lastElem: RMF_RadialMenuElement
+- pointer: PointerEventData
+  
+  .. Methoden ..
++ Awake( ): void
++ Start( ): void
++ Update( ): void
++ getRootMenu( parent: Transform ): RMF_RadialMenu
++ get1Menu(parent: Transform): RMF_RadialMenu
++ get2Menu(parent: Transform): RMF_RadialMenu
++ get3Menu(parent: Transform): RMF_RadialMenu
++ get4Menu(parent: Transform): RMF_RadialMenu
++ destroyPrev( ): void
++ defaultMenu( parent: Transform ): RMF_RadialMenu
++ menu( menuID: int, parent: Transform): RMF_RadialMenu
++ prevMenu( parent: Transform ): RMF_RadialMenu
++ isMenu( id: int ): bool
++ isObject( id: int ): bool
++ getObject( id: int ): GameObject
++ isNullInteger( i: int ): bool
++ showMenu( parent: Transform ): RMF_RadialMenu
++ highlightKlick( elem: int): void
+
+}
+
+class SimpleHandListener{
+  .. Attribute ..
+- _Sensor: KinectSensor
+- _Reader: BodyFrameReader
+- _Data: Body[ ]
+- isClickedLeft: Boolean
+- isClickedRight: Boolean
++ kinectmgr: KinectManager
+- progressDisplayed: bool
+- progressGestureTime: float
+
+  .. Methoden ..
++ Start( ): void
++ OnApplicationQuit( ): void
++ Update( ): void
++ isClickedLeft_m( ): Boolean
++ isClickedRight_m( ): Boolean
+- getRelativeJoint( jointOrigin: int, jointTarget:int ): Vector3
++ getLeftHandAngle( ): float
+
+
+}
+
+
+@enduml
